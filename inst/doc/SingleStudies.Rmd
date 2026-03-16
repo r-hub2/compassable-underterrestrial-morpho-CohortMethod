@@ -18,7 +18,7 @@ editor_options:
 ---
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
-options(width = 200)
+#options(width = 200)
 library(CohortMethod)
 outputFolder <- "e:/temp/cohortMethodVignette"
 folderExists <- dir.exists(outputFolder)
@@ -527,8 +527,11 @@ createCmTable1(balance)
 \selectfont
 ```{r comment=NA,echo=FALSE,message=FALSE}
 if (folderExists) {
+  oldWidth <- getOption("width")
+  options(width = 200)
   table1 <- createCmTable1(balance)
   print(table1, row.names = FALSE, right = FALSE)
+  options(width = oldWidth)
 }
 ```
 \fontsize{10}{12}

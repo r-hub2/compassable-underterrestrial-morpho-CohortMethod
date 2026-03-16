@@ -1,10 +1,10 @@
-## ----echo = FALSE, message = FALSE, warning = FALSE---------------------------------------------------------------------------------------------------------------------------------------------------
-options(width = 200)
+## ----echo = FALSE, message = FALSE, warning = FALSE---------------------------
+#options(width = 200)
 library(CohortMethod)
 outputFolder <- "e:/temp/cohortMethodVignette"
 folderExists <- dir.exists(outputFolder)
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # library(CohortMethod)
 # connectionDetails <- createConnectionDetails(dbms = "postgresql",
 #                                              server = "localhost/ohdsi",
@@ -16,7 +16,7 @@ folderExists <- dir.exists(outputFolder)
 # cohortTable <- "my_cohorts"
 # options(sqlRenderTempEmulationSchema = NULL)
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # library(Capr)
 # 
 # celecoxibConceptId <- 1118084
@@ -69,11 +69,11 @@ folderExists <- dir.exists(outputFolder)
 #                                                diclofenacCohort,
 #                                                osteoArthritisOfKneeCohort)
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # library(PhenotypeLibrary)
 # outcomeCohorts <- getPlCohortDefinitionSet(77) # GI bleed
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # allCohorts <- bind_rows(outcomeCohorts,
 #                         exposuresAndIndicationCohorts)
 # 
@@ -88,7 +88,7 @@ folderExists <- dir.exists(outputFolder)
 #                   cohortTableNames = cohortTableNames,
 #                   cohortDefinitionSet = allCohorts)
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # connection <- DatabaseConnector::connect(connectionDetails)
 # sql <- "SELECT cohort_definition_id, COUNT(*) AS count
 # FROM @cohortDatabaseSchema.@cohortTable
@@ -101,10 +101,10 @@ folderExists <- dir.exists(outputFolder)
 #   )
 # DatabaseConnector::disconnect(connection)
 
-## ----echo=FALSE,message=FALSE-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE-------------------------------------------------
 data.frame(cohort_concept_id = c(1, 2, 3, 77),count = c(917230, 1791695, 993116, 1123643))
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # # Define which types of covariates must be constructed:
 # covSettings <- createDefaultCovariateSettings(
 #   excludedCovariateConceptIds = c(diclofenacConceptId, celecoxibConceptId),
@@ -135,20 +135,20 @@ data.frame(cohort_concept_id = c(1, 2, 3, 77),count = c(917230, 1791695, 993116,
 # )
 # cohortMethodData
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
   cohortMethodData <- loadCohortMethodData(file.path(outputFolder, "cohortMethodData.zip"))
 }
 
-## ----echo=FALSE,message=FALSE-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE-------------------------------------------------
 if (folderExists) {
   cohortMethodData
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # getAttritionTable(cohortMethodData)
 
-## ----echo=FALSE,message=FALSE-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE-------------------------------------------------
 if (folderExists) {
   table <- getAttritionTable(cohortMethodData)
   truncLeft <- function(x, n){
@@ -160,18 +160,18 @@ if (folderExists) {
   table
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # summary(cohortMethodData)
 
-## ----echo=FALSE,message=FALSE-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE-------------------------------------------------
 if (folderExists) {
   summary(cohortMethodData)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # saveCohortMethodData(cohortMethodData, "coxibVsNonselVsGiBleed.zip")
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # studyPop <- createStudyPopulation(
 #   cohortMethodData = cohortMethodData,
 #   outcomeId = 77,
@@ -186,10 +186,10 @@ if (folderExists) {
 #   )
 # )
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # getAttritionTable(studyPop)
 
-## ----echo=FALSE,message=FALSE-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE-------------------------------------------------
 if (folderExists) {
   studyPop <- readRDS(file.path(outputFolder, "studyPop.rds"))
   table <- getAttritionTable(studyPop)
@@ -202,23 +202,23 @@ if (folderExists) {
   table
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # ps <- createPs(cohortMethodData = cohortMethodData, population = studyPop)
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
   ps <- readRDS(file.path(outputFolder, "ps.rds"))
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # computePsAuc(ps)
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
   readRDS(file.path(outputFolder, "auc.rds"))
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # plotPs(ps,
 #        targetLabel = "Celexocib",
 #        comparatorLabel = "Diclofenac",
@@ -226,7 +226,7 @@ if (folderExists) {
 #        showAucLabel = TRUE,
 #        showEquipoiseLabel = TRUE)
 
-## ----echo=FALSE,message=FALSE,warning=FALSE,eval=TRUE-------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,warning=FALSE,eval=TRUE-------------------------
 if (folderExists) {
 plotPs(ps,
        targetLabel = "Celexocib",
@@ -236,10 +236,10 @@ plotPs(ps,
        showEquipoiseLabel = TRUE)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # getPsModel(ps, cohortMethodData)
 
-## ----echo=FALSE,message=FALSE-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE-------------------------------------------------
 if (folderExists) {
   propensityModel <- getPsModel(ps, cohortMethodData)
   truncRight <- function(x, n){
@@ -251,15 +251,15 @@ if (folderExists) {
   head(propensityModel)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # CohortMethod::computeEquipoise(ps)
 
-## ----echo=FALSE,message=FALSE-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE-------------------------------------------------
 if (folderExists) {
   CohortMethod::computeEquipoise(ps)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # trimmedPop <- trimByPs(ps,
 #                        trimByPsArgs = createTrimByPsArgs(
 #                          equipoiseBounds = c(0.3, 0.7)
@@ -268,7 +268,7 @@ if (folderExists) {
 # # is computed using the original relative sizes of the cohorts:
 # plotPs(trimmedPop, ps)
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
   trimmedPop <- trimByPs(ps,
                          trimByPsArgs = createTrimByPsArgs(
@@ -277,14 +277,14 @@ if (folderExists) {
   plotPs(trimmedPop, ps)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # stratifiedPop <- stratifyByPs(ps,
 #                               stratifyByPsArgs = createStratifyByPsArgs(
 #                                 numberOfStrata = 5
 #                               ))
 # plotPs(stratifiedPop)
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
   stratifiedPop <- stratifyByPs(ps, 
                                 stratifyByPsArgs = createStratifyByPsArgs(
@@ -293,14 +293,14 @@ if (folderExists) {
   plotPs(stratifiedPop)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # matchedPop <- matchOnPs(ps,
 #                         matchOnPsArgs = createMatchOnPsArgs(
 #                           maxRatio = 1
 #                         ))
 # plotPs(matchedPop, ps)
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
   matchedPop <- matchOnPs(ps,
                           matchOnPsArgs = createMatchOnPsArgs(
@@ -309,10 +309,10 @@ if (folderExists) {
   plotPs(matchedPop, ps)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # getAttritionTable(matchedPop)
 
-## ----echo=FALSE,message=FALSE-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE-------------------------------------------------
 if (folderExists) {
   getAttritionTable(matchedPop)
   table <- getAttritionTable(matchedPop)
@@ -325,55 +325,58 @@ if (folderExists) {
   table
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # drawAttritionDiagram(matchedPop)
 
-## ----echo=FALSE,message=FALSE,eval=TRUE,fig.width=6,fig.height=8.5,out.width="60%"--------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE,fig.width=6,fig.height=8.5,out.width="60%"----
 if (folderExists) {
   drawAttritionDiagram(matchedPop)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # balance <- computeCovariateBalance(matchedPop, cohortMethodData)
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
   balance <- readRDS(file.path(outputFolder, "balance.rds"))
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # plotCovariateBalanceScatterPlot(balance,
 #                                 showCovariateCountLabel = TRUE,
 #                                 showMaxLabel = TRUE)
 
-## ----echo=FALSE,message=FALSE,warnings=FALSE,eval=TRUE,fig.width=7,fig.height=4.5---------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,warnings=FALSE,eval=TRUE,fig.width=7,fig.height=4.5----
 if (folderExists) {
   plotCovariateBalanceScatterPlot(balance, 
                                   showCovariateCountLabel = TRUE, 
                                   showMaxLabel = TRUE)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # plotCovariateBalanceOfTopVariables(balance)
 
-## ----echo=FALSE,message=FALSE,warning=FALSE,eval=TRUE,fig.width=8,fig.height=5------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,warning=FALSE,eval=TRUE,fig.width=8,fig.height=5----
 if (folderExists) {
   plotCovariateBalanceOfTopVariables(balance)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # createCmTable1(balance)
 
-## ----comment=NA,echo=FALSE,message=FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----comment=NA,echo=FALSE,message=FALSE--------------------------------------
 if (folderExists) {
+  oldWidth <- getOption("width")
+  options(width = 200)
   table1 <- createCmTable1(balance)
   print(table1, row.names = FALSE, right = FALSE)
+  options(width = oldWidth)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # getGeneralizabilityTable(balance)
 
-## ----comment=NA,echo=FALSE,message=FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----comment=NA,echo=FALSE,message=FALSE--------------------------------------
 if (folderExists) {
   table <- getGeneralizabilityTable(balance)
   truncRight <- function(x, n){
@@ -385,7 +388,7 @@ if (folderExists) {
   table
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # computeMdrr(
 #   population = studyPop,
 #   modelType = "cox",
@@ -394,7 +397,7 @@ if (folderExists) {
 #   twoSided = TRUE
 # )
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
 computeMdrr(population = studyPop,
             modelType = "cox",
@@ -403,7 +406,7 @@ computeMdrr(population = studyPop,
             twoSided = TRUE)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # computeMdrr(
 #   population = matchedPop,
 #   modelType = "cox",
@@ -412,7 +415,7 @@ computeMdrr(population = studyPop,
 #   twoSided = TRUE
 # )
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
 computeMdrr(population = matchedPop,
             modelType = "cox",
@@ -421,23 +424,23 @@ computeMdrr(population = matchedPop,
             twoSided = TRUE)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # getFollowUpDistribution(population = matchedPop)
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
 getFollowUpDistribution(population = matchedPop)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # plotFollowUpDistribution(population = matchedPop)
 
-## ----echo=FALSE,message=FALSE,eval=TRUE,fig.width=8,fig.height=5--------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE,fig.width=8,fig.height=5--------------
 if (folderExists) {
 plotFollowUpDistribution(population = matchedPop)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # outcomeModel <- fitOutcomeModel(
 #   population = studyPop,
 #   fitOutcomeModelArgs = createFitOutcomeModelArgs(
@@ -446,13 +449,13 @@ plotFollowUpDistribution(population = matchedPop)
 # )
 # outcomeModel
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
   outcomeModel <- readRDS(file.path(outputFolder, "OutcomeModel1.rds"))
   outcomeModel
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # outcomeModel <- fitOutcomeModel(
 #   population = matchedPop,
 #   fitOutcomeModelArgs = createFitOutcomeModelArgs(
@@ -461,13 +464,13 @@ if (folderExists) {
 # )
 # outcomeModel
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
   outcomeModel <- readRDS(file.path(outputFolder, "OutcomeModel2.rds"))
   outcomeModel
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # outcomeModel <- fitOutcomeModel(
 #   population = ps,
 #   fitOutcomeModelArgs = createFitOutcomeModelArgs(
@@ -478,13 +481,13 @@ if (folderExists) {
 # )
 # outcomeModel
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
   outcomeModel <- readRDS(file.path(outputFolder, "OutcomeModel3.rds"))
   outcomeModel
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # interactionCovariateIds <- c(8532001, 201826210, 21600960413)
 # # 8532001 = Female
 # # 201826210 = Type 2 Diabetes
@@ -499,13 +502,13 @@ if (folderExists) {
 # )
 # outcomeModel
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
   outcomeModel <- readRDS(file.path(outputFolder, "OutcomeModel4.rds"))
   outcomeModel
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # balanceFemale <- computeCovariateBalance(
 #   population,
 #   cohortMethodData,
@@ -515,13 +518,13 @@ if (folderExists) {
 # )
 # plotCovariateBalanceScatterPlot(balanceFemale)
 
-## ----echo=FALSE,message=FALSE,warning=FALSE,eval=TRUE,fig.width=8,fig.height=5------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,warning=FALSE,eval=TRUE,fig.width=8,fig.height=5----
 if (folderExists) {
   balanceFemale <- readRDS(file.path(outputFolder, "balanceFemale.rds"))
   plotCovariateBalanceScatterPlot(balanceFemale)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # outcomeModel <- fitOutcomeModel(
 #   population = matchedPop,
 #   cohortMethodData = cohortMethodData,
@@ -532,32 +535,32 @@ if (folderExists) {
 # )
 # outcomeModel
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
   outcomeModel <- readRDS(file.path(outputFolder, "OutcomeModel5.rds"))
   outcomeModel
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # exp(coef(outcomeModel))
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
   exp(coef(outcomeModel))
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # exp(confint(outcomeModel))
 
-## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE,eval=TRUE---------------------------------------
 if (folderExists) {
   exp(confint(outcomeModel))
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # getOutcomeModel(outcomeModel, cohortMethodData)
 
-## ----echo=FALSE,message=FALSE-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE,message=FALSE-------------------------------------------------
 if (folderExists) {
   outcomeModel <- getOutcomeModel(outcomeModel, cohortMethodData)
   truncRight <- function(x, n){
@@ -569,15 +572,15 @@ if (folderExists) {
   outcomeModel
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # plotKaplanMeier(matchedPop, includeZero = FALSE)
 
-## ----echo=FALSE, message=FALSE, results='hide'--------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE, message=FALSE, results='hide'--------------------------------
 if (folderExists) {
   plotKaplanMeier(matchedPop, includeZero = FALSE)
 }
 
-## ----eval=FALSE---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 # plotTimeToEvent(
 #   cohortMethodData = cohortMethodData,
 #   outcomeId = 77,
@@ -588,7 +591,7 @@ if (folderExists) {
 #   endAnchor = "cohort end"
 # )
 
-## ----echo=FALSE, message=FALSE, results='hide'--------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----echo=FALSE, message=FALSE, results='hide'--------------------------------
 if (folderExists) {
   plotTimeToEvent(
     cohortMethodData = cohortMethodData,
@@ -602,9 +605,9 @@ if (folderExists) {
   
 }
 
-## ----eval=TRUE----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=TRUE----------------------------------------------------------------
 citation("CohortMethod")
 
-## ----eval=TRUE----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=TRUE----------------------------------------------------------------
 citation("Cyclops")
 
