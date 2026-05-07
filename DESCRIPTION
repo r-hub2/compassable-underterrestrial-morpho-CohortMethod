@@ -2,8 +2,8 @@ Package: CohortMethod
 Type: Package
 Title: Comparative Cohort Method with Large Scale Propensity and
         Outcome Models
-Version: 6.0.1
-Date: 2026-03-16
+Version: 6.0.2
+Date: 2026-05-07
 Authors@R: c(
 	person("Martijn", "Schuemie", , "schuemie@ohdsi.org", role = c("aut", "cre")),
 	person("Marc", "Suchard", role = c("aut")),
@@ -42,7 +42,7 @@ NeedsCompilation: yes
 RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
-Packaged: 2026-03-16 16:00:59 UTC; schuemie
+Packaged: 2026-05-07 10:14:13 UTC; schuemie
 Author: Martijn Schuemie [aut, cre],
   Marc Suchard [aut],
   Patrick Ryan [aut]
